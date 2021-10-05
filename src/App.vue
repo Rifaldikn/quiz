@@ -1,28 +1,34 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app>
+    <v-main>
+      <Greetings v-if="screen == 'start'" @clickedToStart="clickToStartBtn" />
+      <Quiz v-if="screen == 'quiz'" @goToHome="getToHome" />
+    </v-main>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Greetings from "./components/Greetings";
+import Quiz from "./components/Quiz";
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
-</script>
+  name: "App",
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+  components: {
+    Greetings,
+    Quiz,
+  },
+
+  data: () => ({
+    screen: "quiz",
+  }),
+  methods: {
+    getToHome() {
+      this.screen = "start";
+    },
+    clickToStartBtn() {
+      this.screen = "quiz";
+    },
+  },
+};
+</script>
